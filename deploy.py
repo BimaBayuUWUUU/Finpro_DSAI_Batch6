@@ -193,7 +193,7 @@ data = {
 input_df = pd.DataFrame(data)
 
 # Tombol untuk membuat prediksi
-if st.button('Prediksi'):
+if st.button('Prediksi Industri Pekerjaan'):
     # Melakukan skala data input menggunakan scaler yang telah dimuat
     scaled_input_df = scaler.transform(input_df)
 
@@ -348,14 +348,8 @@ default_values = {
     'sector_Transportation_and_Logistics': False,
 }
 
-# Initialize session state with default values if not already set
-for key, value in default_values.items():
-    if key not in st.session_state:
-        st.session_state[key] = value
-
-# Tombol untuk memulai ulang prediksi
-if st.button('Mulai Ulang'):
+# Tombol untuk menghapus nilai inputan
+if st.button('Bersihkan Inputan'):
     # Mengatur ulang semua nilai inputan menjadi default
     for key, value in default_values.items():
         st.session_state[key] = value
-    st.experimental_rerun()
