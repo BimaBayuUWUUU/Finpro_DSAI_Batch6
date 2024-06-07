@@ -356,6 +356,6 @@ for key, value in default_values.items():
 # Tombol untuk memulai ulang prediksi
 if st.button('Mulai Ulang'):
     # Mengatur ulang semua nilai inputan menjadi default
-    for key in st.session_state.keys():
-        del st.session_state[key]
+    for key, value in default_values.items():
+        st.session_state[key] = value
     st.experimental_rerun()
