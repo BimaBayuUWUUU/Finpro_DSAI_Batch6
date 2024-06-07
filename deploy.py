@@ -4,10 +4,13 @@ import numpy as np
 import pandas as pd
 
 # Memuat model dari file
-model = pickle.load('Xgb_model.pkl')
+with open('Xgb_model.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
 
 # Memuat scaler dari file
-scaler = pickle.load('scaler7.pkl')
+with open('scaler7.pkl', 'rb') as scaler_file:
+    scaler = pickle.load(scaler_file)
+    
 # Dictionary untuk mapping input
 periode_pembayaran_dict = {'MONTHLY': 4, 'YEARLY': 5, 'HOURLY': 2, 'NOTPAID': 1, 'WEEKLY': 3}
 tingkat_pengalaman_terformat_dict = {'Entry level': 2, 'Mid-Senior level': 4, 'Director': 6, 'Associate': 3, 'Executive': 5, 'Internship': 1}
