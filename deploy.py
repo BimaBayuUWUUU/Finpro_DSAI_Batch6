@@ -291,5 +291,7 @@ if st.button('Prediksi'):
 
 # Tombol untuk memulai ulang prediksi
 if st.button('Mulai Ulang'):
-    # Mengatur ulang formulir dengan menjalankan ulang skrip
+    # Mengatur ulang semua nilai inputan menjadi default
+    for key in st.session_state.keys():
+        del st.session_state[key]
     st.experimental_rerun()
