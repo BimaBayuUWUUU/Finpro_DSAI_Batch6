@@ -1,16 +1,13 @@
 import streamlit as st
-import pickle
+import joblib
 import numpy as np
 import pandas as pd
 
 # Memuat model dari file
-with open('Xgb_model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+model = joblib.load('Xgb_model.pkl')
 
 # Memuat scaler dari file
-with open('scaler7.pkl', 'rb') as scaler_file:
-    scaler = pickle.load(scaler_file)
-    
+scaler = joblib.load('scaler7.pkl')
 # Dictionary untuk mapping input
 periode_pembayaran_dict = {'MONTHLY': 4, 'YEARLY': 5, 'HOURLY': 2, 'NOTPAID': 1, 'WEEKLY': 3}
 tingkat_pengalaman_terformat_dict = {'Entry level': 2, 'Mid-Senior level': 4, 'Director': 6, 'Associate': 3, 'Executive': 5, 'Internship': 1}
