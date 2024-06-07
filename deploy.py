@@ -289,6 +289,70 @@ if st.button('Prediksi'):
     st.header("Industri")
     st.write(nama_industri)
 
+# Default values
+default_values = {
+    'diperbolehkan_jarak_jauh': 'Tidak',
+    'periode_pembayaran': 'NOTPAID',
+    'tingkat_pengalaman_terformat': 'Entry level',
+    'tipe_pendaftaran': 'OffsiteApply',
+    'jenis_pekerjaan': 'Other',
+    'jumlah_skill_perindustri': 1,
+    'standar_gaji': 0,
+    'kategori_lamaran_industri': 1,
+    'skill_Accounting_Auditing': False,
+    'skill_Administrative': False,
+    'skill_Advertising': False,
+    'skill_Analyst': False,
+    'skill_Art_Creative': False,
+    'skill_Business_Development': False,
+    'skill_Consulting': False,
+    'skill_Customer_Service': False,
+    'skill_Design': False,
+    'skill_Distribution': False,
+    'skill_Education': False,
+    'skill_Engineering': False,
+    'skill_Finance': False,
+    'skill_General_Business': False,
+    'skill_Health_Care_Provider': False,
+    'skill_Human_Resources': False,
+    'skill_Information_Technology': False,
+    'skill_Legal': False,
+    'skill_Management': False,
+    'skill_Manufacturing': False,
+    'skill_Marketing': False,
+    'skill_Other': False,
+    'skill_Product_Management': False,
+    'skill_Production': False,
+    'skill_Project_Management': False,
+    'skill_Public_Relations': False,
+    'skill_Purchasing': False,
+    'skill_Quality_Assurance': False,
+    'skill_Research': False,
+    'skill_Sales': False,
+    'skill_Science': False,
+    'skill_Strategy_Planning': False,
+    'skill_Supply_Chain': False,
+    'skill_Training': False,
+    'skill_Writing_Editing': False,
+    'sector_Construction_and_Engineering': False,
+    'sector_Consumer_Services_and_Retail': False,
+    'sector_Education_and_Research': False,
+    'sector_Energy_and_Natural_Resources': False,
+    'sector_Entertainment': False,
+    'sector_Finance_and_Legal_Services': False,
+    'sector_Health_and_Wellness': False,
+    'sector_Manufacturing': False,
+    'sector_Non_profit_and_Government': False,
+    'sector_Professional_and_Business_Services': False,
+    'sector_Technology_and_IT': False,
+    'sector_Transportation_and_Logistics': False,
+}
+
+# Initialize session state with default values if not already set
+for key, value in default_values.items():
+    if key not in st.session_state:
+        st.session_state[key] = value
+
 # Tombol untuk memulai ulang prediksi
 if st.button('Mulai Ulang'):
     # Mengatur ulang semua nilai inputan menjadi default
