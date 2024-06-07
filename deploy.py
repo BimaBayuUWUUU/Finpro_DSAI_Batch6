@@ -58,10 +58,10 @@ jenis_pekerjaan = st.selectbox(
 jenis_pekerjaan_dict[f'jenis_pekerjaan_{jenis_pekerjaan}'] = 1
 
 # Inputan untuk jumlah skill perindustri
-jumlah_skill_perindustri = st.number_input('Jumlah Skill Perindustri', min_value=0, max_value=10, value=2)
+jumlah_skill_perindustri = st.number_input('Jumlah Skill Perindustri', min_value=1, max_value=3, value=1)
 
 # Inputan untuk standar gaji
-standar_gaji = st.number_input('Standar Gaji', min_value=0, value=10000)
+standar_gaji = st.number_input('Standar Gaji', min_value=0, value=0)
 
 # Inputan untuk kategori lamaran industri
 kategori_lamaran_industri = st.selectbox('Kategori Lamaran Industri', options=list(kategori_lamaran_industri_options.keys()), format_func=lambda x: kategori_lamaran_industri_options[x])
@@ -192,100 +192,104 @@ data = {
 # Mengubah dictionary ke DataFrame
 input_df = pd.DataFrame(data)
 
-# # Menampilkan dictionary data yang telah diisi
-# st.write("Data Input:")
-# st.table(input_df)
+# Tombol untuk membuat prediksi
+if st.button('Prediksi'):
+    # Melakukan skala data input menggunakan scaler yang telah dimuat
+    scaled_input_df = scaler.transform(input_df)
 
-# Scaling data input menggunakan scaler yang telah dimuat
-scaled_input_df = scaler.transform(input_df)
+    # Melakukan prediksi
+    prediksi = model.predict(scaled_input_df)
 
-# Melakukan prediksi
-prediksi = model.predict(scaled_input_df)
-# Menampilkan hasil prediksi
-st.header("Hasil Prediksi")
+    # Menampilkan hasil prediksi
+    st.header("Hasil Prediksi")
 
-mapping_industri = {
-    1: 'Accounting', 
-    2: 'Advertising Services', 
-    3: 'Airlines and Aviation',
-    4: 'Appliances, Electrical, and Electronics Manufacturing',
-    5: 'Architecture and Planning',
-    6: 'Automation Machinery Manufacturing',
-    7: 'Aviation and Aerospace Component Manufacturing',
-    8: 'Banking',
-    9: 'Biotechnology Research',
-    10: 'Book and Periodical Publishing',
-    11: 'Broadcast Media Production and Distribution',
-    12: 'Business Consulting and Services',
-    13: 'Chemical Manufacturing',
-    14: 'Civil Engineering',
-    15: 'Computer Hardware Manufacturing',
-    16: 'Computer and Network Security',
-    17: 'Computers and Electronics Manufacturing',
-    18: 'Construction',
-    19: 'Consumer Services',
-    20: 'Defense and Space Manufacturing',
-    21: 'Design Services',
-    22: 'E-Learning Providers',
-    23: 'Education Administration Programs',
-    24: 'Entertainment Providers',
-    25: 'Environmental Services',
-    26: 'Facilities Services',
-    27: 'Financial Services',
-    28: 'Food and Beverage Manufacturing',
-    29: 'Food and Beverage Services',
-    30: 'Government Administration',
-    31: 'Higher Education',
-    32: 'Hospitality',
-    33: 'Hospitals and Health Care',
-    34: 'Human Resources Services',
-    35: 'IT Services and IT Consulting',
-    36: 'Individual and Family Services',
-    37: 'Industrial Machinery Manufacturing',
-    38: 'Information Services',
-    39: 'Insurance',
-    40: 'Internet Marketplace Platforms',
-    41: 'Investment Banking',
-    42: 'Investment Management',
-    43: 'Law Practice',
-    44: 'Legal Services',
-    45: 'Machinery Manufacturing',
-    46: 'Manufacturing',
-    47: 'Medical Equipment Manufacturing',
-    48: 'Medical Practices',
-    49: 'Mental Health Care',
-    50: 'Mining',
-    51: 'Motor Vehicle Manufacturing',
-    52: 'Non-profit Organizations',
-    53: 'Oil and Gas',
-    54: 'Packaging and Containers Manufacturing',
-    55: 'Pharmaceutical Manufacturing',
-    56: 'Primary and Secondary Education',
-    57: 'Real Estate',
-    58: 'Renewable Energy Semiconductor Manufacturing',
-    59: 'Research Services',
-    60: 'Restaurants',
-    61: 'Retail',
-    62: 'Retail Apparel and Fashion',
-    63: 'Semiconductor Manufacturing',
-    64: 'Software Development',
-    65: 'Staffing and Recruiting',
-    66: 'Technology, Information and Internet',
-    67: 'Telecommunications',
-    68: 'Transportation, Logistics, Supply Chain and Storage',
-    69: 'Travel Arrangements',
-    70: 'Truck Transportation',
-    71: 'Utilities',
-    72: 'Veterinary Services',
-    73: 'Wellness and Fitness Services',
-    74: 'Wholesale',
-    75: 'Wholesale Building Materials'
-}
+    mapping_industri = {
+        1: 'Accounting', 
+        2: 'Advertising Services', 
+        3: 'Airlines and Aviation',
+        4: 'Appliances, Electrical, and Electronics Manufacturing',
+        5: 'Architecture and Planning',
+        6: 'Automation Machinery Manufacturing',
+        7: 'Aviation and Aerospace Component Manufacturing',
+        8: 'Banking',
+        9: 'Biotechnology Research',
+        10: 'Book and Periodical Publishing',
+        11: 'Broadcast Media Production and Distribution',
+        12: 'Business Consulting and Services',
+        13: 'Chemical Manufacturing',
+        14: 'Civil Engineering',
+        15: 'Computer Hardware Manufacturing',
+        16: 'Computer and Network Security',
+        17: 'Computers and Electronics Manufacturing',
+        18: 'Construction',
+        19: 'Consumer Services',
+        20: 'Defense and Space Manufacturing',
+        21: 'Design Services',
+        22: 'E-Learning Providers',
+        23: 'Education Administration Programs',
+        24: 'Entertainment Providers',
+        25: 'Environmental Services',
+        26: 'Facilities Services',
+        27: 'Financial Services',
+        28: 'Food and Beverage Manufacturing',
+        29: 'Food and Beverage Services',
+        30: 'Government Administration',
+        31: 'Higher Education',
+        32: 'Hospitality',
+        33: 'Hospitals and Health Care',
+        34: 'Human Resources Services',
+        35: 'IT Services and IT Consulting',
+        36: 'Individual and Family Services',
+        37: 'Industrial Machinery Manufacturing',
+        38: 'Information Services',
+        39: 'Insurance',
+        40: 'Internet Marketplace Platforms',
+        41: 'Investment Banking',
+        42: 'Investment Management',
+        43: 'Law Practice',
+        44: 'Legal Services',
+        45: 'Machinery Manufacturing',
+        46: 'Manufacturing',
+        47: 'Medical Equipment Manufacturing',
+        48: 'Medical Practices',
+        49: 'Mental Health Care',
+        50: 'Mining',
+        51: 'Motor Vehicle Manufacturing',
+        52: 'Non-profit Organizations',
+        53: 'Oil and Gas',
+        54: 'Packaging and Containers Manufacturing',
+        55: 'Pharmaceutical Manufacturing',
+        56: 'Primary and Secondary Education',
+        57: 'Real Estate',
+        58: 'Renewable Energy Semiconductor Manufacturing',
+        59: 'Research Services',
+        60: 'Restaurants',
+        61: 'Retail',
+        62: 'Retail Apparel and Fashion',
+        63: 'Semiconductor Manufacturing',
+        64: 'Software Development',
+        65: 'Staffing and Recruiting',
+        66: 'Technology, Information and Internet',
+        67: 'Telecommunications',
+        68: 'Transportation, Logistics, Supply Chain and Storage',
+        69: 'Travel Arrangements',
+        70: 'Truck Transportation',
+        71: 'Utilities',
+        72: 'Veterinary Services',
+        73: 'Wellness and Fitness Services',
+        74: 'Wholesale',
+        75: 'Wholesale Building Materials'
+    }
 
-# Mapping hasil prediksi ke industri menggunakan mapping_industri
-true_indices = np.where(prediksi[0])[0]
-industri = true_indices + 1  # Karena indeks dimulai dari 0, tambahkan 1
-nama_industri = [mapping_industri[idx] for idx in industri]
+    # Memetakan hasil prediksi ke industri menggunakan mapping_industri
+    true_indices = np.where(prediksi[0])[0]
+    industri = true_indices + 1  # Menambahkan 1 karena indeks dimulai dari 0
+    nama_industri = [mapping_industri[idx] for idx in industri]
 
-st.header("Industri")
-st.write(nama_industri)
+    st.header("Industri")
+    st.write(nama_industri)
+
+# Tombol untuk memulai ulang prediksi
+if st.button('Mulai Ulang'):
+    # Mengatur ulang formulir dengan menjalankan ulang skrip
+    st.experimental_rerun()
